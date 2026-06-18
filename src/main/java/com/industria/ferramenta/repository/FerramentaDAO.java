@@ -97,7 +97,7 @@ public class FerramentaDAO {
         try{
             
             Connection conn = Conexao.conectar();
-            PreparedStatement stmt = conn.prepareStatement("(DELETE FROM tb_ferramenta WHERE id = ?");
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM tb_ferramenta WHERE id = ?");
             
             stmt.setLong(1, id);
             linhas = stmt.executeUpdate();

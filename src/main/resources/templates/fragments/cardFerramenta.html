@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="cardFerramenta(f)" class="card shadow-sm">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <h5 class="card-title mb-0"
+                th:text="${f.nome}">
+            </h5>
+
+            
+            <!---------------------- INFOS FLUTUANTES ---------------------->
+            <!-- passando o mouse aparece -->
+            <span
+                class="badge bg-secondary text-light"
+                data-bs-toggle="tooltip"
+                data-bs-html="true"
+
+                th:attr="
+                    data-bs-title=
+                    'Horas de Uso: ' + ${f.horasDeUso}
+                    + '<br>Vida Útil: ' + ${f.vidaUtilMaxima}
+                    + '<br>Desgaste: ' + ${#numbers.formatDecimal(f.percentualDesgaste,1,1)} + '%'
+                ">
+                INFO
+            </span>
+
+            
+            <!---------------------- BARRA PORCENTAGEM ---------------------->
+        </div>
+        <div class="progress mt-3">
+
+            <div class="progress-bar"
+                 role="progressbar"
+                 th:style="'width:' + ${f.percentualDesgaste} + '%'"
+
+                 th:classappend="${
+                    f.percentualDesgaste > 80 ? ' bg-danger' :
+                    (f.percentualDesgaste > 50 ? ' bg-warning' : ' bg-success')
+                 }">
+            </div>
+        </div>
+        
+        
+        <!---------------------- ACOES ---------------------->
+        <div class="d-flex justify-content-end gap-2 mt-3">
+
+            <a th:href="@{/ferramentas/editar/{id}(id=${f.id})}"
+               class="btn btn-outline-primary btn-sm">
+                Editar
+            </a>
+
+            <a th:href="@{/ferramentas/deletar/{id}(id=${f.id})}"
+                class="btn btn-danger btn-sm"
+                onclick="return confirm('Deseja realmente excluir esta ferramenta?')">
+                <!--  MENSAGEM DE CONFIRMACAO, clicando o seistema executa o 'confirm' -->
+                Excluir
+            </a>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

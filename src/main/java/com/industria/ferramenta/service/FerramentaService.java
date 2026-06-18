@@ -63,7 +63,9 @@ public class FerramentaService {
     }
     
     
-    public void deleteById(Long id){
-        fdao.deleteById(id);
+    public boolean deleteById(Long id){
+        // info boolean para detectar se foi deletado para funcao no controller
+        int linhas = fdao.deleteById(id);
+        return linhas > 0;
     }
 }

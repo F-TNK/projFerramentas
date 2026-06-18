@@ -63,9 +63,12 @@ public class FerramentaDTO {
     
     // ----------- FUNC -----------
     
-    public Double getPercentualDesgaste(){
-        Double desgaste = (double) (horasDeUso / vidaUtilMaxima * 100);
-        return desgaste;
+    public Double getPercentualDesgaste() {
+        if (vidaUtilMaxima == 0) {
+            return 0.0;
+        }
+
+        return (horasDeUso * 100.0) / vidaUtilMaxima;
     }
     
 }
