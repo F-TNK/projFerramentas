@@ -21,7 +21,9 @@ import org.springframework.stereotype.Repository;
 public class FerramentaDAO {
     
     
-    public void novaFerramenta(FerramentaDTO f){
+    public int novaFerramenta(FerramentaDTO f){
+        int linhas = 0;
+        // retorna linhas afetadas
         
         try {
             
@@ -32,11 +34,13 @@ public class FerramentaDAO {
             stmt.setString(1, f.getNome());
             stmt.setInt(2, f.getHorasDeUso());
             stmt.setInt(3, f.getVidaUtilMaxima());
-            stmt.executeUpdate();
+            linhas = stmt.executeUpdate();
             
         } catch (SQLException e){
             e.printStackTrace();
         }
+        
+        return linhas;
     }
     
     
@@ -65,7 +69,8 @@ public class FerramentaDAO {
     }
     
     
-    public void update(FerramentaDTO ferramenta){
+    public int update(FerramentaDTO ferramenta){
+        int linhas = 0;
         
         try {
             
@@ -75,17 +80,19 @@ public class FerramentaDAO {
             stmt.setString(1, ferramenta.getNome());
             stmt.setInt(2, ferramenta.getHorasDeUso());
             stmt.setInt(3, ferramenta.getVidaUtilMaxima());
+            stmt.setLong(4, ferramenta.getId());
             
-            stmt.executeUpdate();
-            stmt.close();
-            conn.close();
+            linhas = stmt.executeUpdate();
             
         } catch (SQLException e){
             e.printStackTrace();
         }
+        
+        return linhas;
     }
     
-    public void deleteById(Long id){
+    public int deleteById(Long id){
+        int linhas = 0;
         
         try{
             
@@ -93,12 +100,12 @@ public class FerramentaDAO {
             PreparedStatement stmt = conn.prepareStatement("(DELETE FROM tb_ferramenta WHERE id = ?");
             
             stmt.setLong(1, id);
-            stmt.executeUpdate();
-            stmt.close();
-            conn.close();
+            linhas = stmt.executeUpdate();
             
         } catch (SQLException e){
             e.printStackTrace();
         }
+        
+        return linhas;
     }
 }

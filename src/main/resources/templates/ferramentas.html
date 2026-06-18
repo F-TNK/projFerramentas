@@ -3,13 +3,53 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: base(~{::div})}">
     <head>
-        <title>TODO supply a title</title>
+        <title>Ferramentas</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div class="card shadow-sm p-4"> 
+            
+            <h2 class="mb-4">Gerenciamento de Ferramentas</h2>
+            
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col" style="width: 10%;">ID</th>
+                            <th scope="col" style="width: 30%;">Nome</th>
+                            <th scope="col" style="width: 20%;">Horas de Uso</th>
+                            <th scope="col" style="width: 20%;">Vida Útil Máxima</th>
+                            <th scope="col" style="width: 20%;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="ferramenta : ${ferramentas}">
+                            <th scope="row" th:text="${ferramenta.id}">1</th>
+                            <td th:text="${ferramenta.nome}">Nome da Ferramenta</td>
+                            <td>
+                                <span class="badge bg-secondary" th:text="${ferramenta.horasDeUso} + 'h'">0h</span>
+                            </td>
+                            <td>
+                                <span class="badge bg-info text-dark" th:text="${ferramenta.vidaUtilMaxima} + 'h'">100h</span>
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-warning btn-sm">Editar</a>
+                                <a href="#" class="btn btn-danger btn-sm">Excluir</a>
+                            </td>
+                        </tr>
+                        
+                        <tr th:if="${#lists.isEmpty(ferramentas)}">
+                            <td colspan="5" class="text-center text-muted py-4">
+                                Nenhuma ferramenta cadastrada no banco de dados.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
     </body>
 </html>

@@ -9,35 +9,44 @@ import com.industria.ferramenta.service.FerramentaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author ftana
  */
-@RestController
-@RequestMapping("/ferramentas")
+@Controller
+// @RequestMapping
 public class FerramentaController {
     
     @Autowired
     private FerramentaService service;
     
-    @PostMapping("/ferramentas/salvar")
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/ferramentas";
+    }
+    
+    @GetMapping("/ferramentas")
+    public String listarFerramentas(Model model){
+        List<FerramentaDTO> lista = service.listarFerramentas();
+
+        model.addAttribute("ferramentas", lista);
+        
+        return "ferramentas";
+    }
+    
+    @PostMapping("/salvar")
     public String novaFerramenta(FerramentaDTO f){
         service.novaFerramenta(f);
         return "redirect:/ferramentas";
     }
     
-    @GetMapping("/ferramentas")
-    public List<FerramentaDTO> listarFerramentas(){
-        return service.listarFerramentas();
-    }
-    
-    @PutMapping
+    @PutMapping("/alterar")
     public String update(FerramentaDTO ferramenta){
         service.update(ferramenta);
         return "redirect:/ferramentas";

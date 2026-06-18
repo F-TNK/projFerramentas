@@ -30,7 +30,7 @@ CREATE TABLE `tb_ferramenta` (
   `horas_de_uso` int NOT NULL,
   `vida_util_maxima` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +39,7 @@ CREATE TABLE `tb_ferramenta` (
 
 LOCK TABLES `tb_ferramenta` WRITE;
 /*!40000 ALTER TABLE `tb_ferramenta` DISABLE KEYS */;
+INSERT INTO `tb_ferramenta` VALUES (1,'Sensor',0,43800),(2,'Drone',8766,26300);
 /*!40000 ALTER TABLE `tb_ferramenta` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-16 17:29:35
+-- Dump completed on 2026-06-18 13:54:20
